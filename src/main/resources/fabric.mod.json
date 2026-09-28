@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "bow-hitbox-helper",
+  "version": "${version}",
+  "name": "Bow & Hitbox Helper",
+  "description": "Client utility mod displaying bow aim angles and quick hitbox toggle for Minecraft 1.16.5.",
+  "authors": [
+    "Developer"
+  ],
+  "contact": {
+    "homepage": "https://github.com"
+  },
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.example.bowhitbox.BowHitboxHelperClient"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.14.0",
+    "fabric": "*",
+    "minecraft": "1.16.5",
+    "java": ">=8"
+  }
+}
