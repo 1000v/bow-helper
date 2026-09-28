@@ -10,6 +10,10 @@
 | TSK-004 | Setup GitHub Actions CI workflow (`.github/workflows/build.yml`) | Completed | `.github/workflows/build.yml` created |
 | TSK-005 | Setup Gradle wrapper files (`gradle-wrapper.properties`, `gradlew`, `gradlew.bat`) | Completed | Wrapper properties and scripts created |
 | TSK-006 | Ready for git commit and push to remote repository | Completed | All project files created and ready |
+| TSK-007 | Implement BookmarkManager (Feature 2: Angle Bookmarks) | Completed | `BookmarkManager.java` created |
+| TSK-008 | Implement BallisticsSolver & Raycast Distance (Feature 3 & Elevation guide) | Completed | `BallisticsSolver.java` created |
+| TSK-009 | Implement ArmorHudOverlay (Feature 4: Armor & Hand Durability HUD) | Completed | `ArmorHudOverlay.java` created |
+| TSK-010 | Update Keybindings, Lang files, and BowHudOverlay integration | Completed | Updated client classes, lang JSONs, and README |
 
 ---
 
@@ -41,3 +45,21 @@
 - [x] **TSK-006: Ready for git commit and push**
   - Deliverables: Clean git working tree, verified build config.
   - Dependencies: TSK-001 through TSK-005.
+
+- [x] **TSK-007: Implement BookmarkManager (Feature 2: Angle Bookmarks)**
+  - Deliverables: `src/main/java/com/example/bowhitbox/BookmarkManager.java`.
+  - Dependencies: TSK-003.
+
+- [x] **TSK-008: Implement BallisticsSolver & Raycast Distance (Feature 3 & Elevation guide)**
+  - Deliverables: `src/main/java/com/example/bowhitbox/BallisticsSolver.java`.
+  - Dependencies: TSK-003.
+
+- [x] **TSK-009: Implement ArmorHudOverlay (Feature 4: Armor & Hand Durability HUD)**
+  - Deliverables: `src/main/java/com/example/bowhitbox/ArmorHudOverlay.java`.
+  - Dependencies: TSK-003.
+
+- [x] **TSK-010: Update Keybindings, Lang files, and BowHudOverlay integration**
+  - Deliverables: Updated `BowHitboxHelperClient.java`, `BowHudOverlay.java`, lang JSONs.
+  - Dependencies: TSK-007, TSK-008, TSK-009.
+
+

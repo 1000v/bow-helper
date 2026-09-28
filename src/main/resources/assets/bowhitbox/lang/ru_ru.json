@@ -1,5 +1,8 @@
 {
   "category.bowhitbox.general": "Помощник лука и хитбоксов",
   "key.bowhitbox.toggle_hud": "Вкл/выкл HUD лука",
-  "key.bowhitbox.toggle_hitbox": "Вкл/выкл хитбоксы"
+  "key.bowhitbox.toggle_hitbox": "Вкл/выкл хитбоксы",
+  "key.bowhitbox.save_bookmark": "Запомнить угол прицеливания",
+  "key.bowhitbox.clear_bookmark": "Сбросить метку прицеливания",
+  "key.bowhitbox.toggle_armor": "Вкл/выкл Armor HUD"
 }

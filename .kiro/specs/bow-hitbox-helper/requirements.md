@@ -18,7 +18,19 @@
 
 ### FR-4: GitHub Actions CI Build
 - **FR-4.1**: The repository SHALL include a GitHub Actions workflow that executes on push or manual trigger (`workflow_dispatch`).
-- **FR-4.2**: The workflow SHALL run `./gradlew build` and upload the compiled `.jar` artifact for download.
+### FR-5: Angle Bookmarks / Пристрелочные метки
+- **FR-5.1**: The client SHALL provide a keybind (default: `K`) to save the current aim angles (Yaw/Pitch) and player location as an active bookmark.
+- **FR-5.2**: The client SHALL provide a keybind (default: `J`) to clear the active bookmark.
+- **FR-5.3**: When an active bookmark exists and player holds a bow, the HUD SHALL display the delta offset ($\Delta$Yaw, $\Delta$Pitch) to align with the saved mark.
+
+### FR-6: Distance Meter & Target Hit Elevation Advisor
+- **FR-6.1**: The client SHALL calculate distance to the target block/entity in crosshair using raycasting (up to 128 blocks).
+- **FR-6.2**: When looking at a target with a bow, the client SHALL calculate the recommended launch pitch angle to hit the target based on Minecraft arrow ballistics (velocity 3.0, drag 0.99, gravity 0.05).
+- **FR-6.3**: The HUD SHALL display the target distance, recommended elevation pitch, and guidance difference (e.g. `Подними прицел на +X.X°`).
+
+### FR-7: Armor & Held Item Durability HUD
+- **FR-7.1**: The client SHALL render durability indicators for all equipped armor pieces (Helmet, Chestplate, Leggings, Boots) and current held item.
+- **FR-7.2**: Durability SHALL display remaining uses and color-coded status (Green > 60%, Yellow 25-60%, Red < 25%).
 
 ---
 
@@ -36,3 +48,7 @@
 - **AC-2.1**: Given player holds a bow, when looking around, then Azimuth and Elevation angles update in real-time on the top-left HUD.
 - **AC-3.1**: Given mod is enabled, when pressing master toggle key `H`, then the mod HUD is disabled.
 - **AC-4.1**: Given GitHub Actions workflow runs, then a downloadable `.jar` file is generated under Artifacts.
+- **AC-5.1**: Given player presses `K`, then current aim is saved and alignment guidance appears on HUD.
+- **AC-6.1**: Given crosshair points at a distant target, then HUD shows exact distance and recommended pitch to hit.
+- **AC-7.1**: Given player equips armor or holds damaged tool, then remaining durability displays on HUD.
+
