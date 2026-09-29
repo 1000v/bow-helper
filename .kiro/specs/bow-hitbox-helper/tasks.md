@@ -14,6 +14,10 @@
 | TSK-008 | Implement BallisticsSolver & Raycast Distance (Feature 3 & Elevation guide) | Completed | `BallisticsSolver.java` created |
 | TSK-009 | Implement ArmorHudOverlay (Feature 4: Armor & Hand Durability HUD) | Completed | `ArmorHudOverlay.java` created |
 | TSK-010 | Update Keybindings, Lang files, and BowHudOverlay integration | Completed | Updated client classes, lang JSONs, and README |
+| TSK-011 | Implement 3D World Trajectory Arc & Landing Marker | Completed | `TrajectoryRenderer.java` created |
+| TSK-012 | Implement Dynamic Crosshair Bow Charge Indicator | Completed | `CrosshairIndicator.java` created |
+| TSK-013 | Upgrade BookmarkManager to 5 slots with cycling keybind | Completed | `BookmarkManager.java` updated |
+| TSK-014 | Verification, Git commit, and Push to GitHub | Completed | Git commit and push |
 
 ---
 
@@ -61,5 +65,23 @@
 - [x] **TSK-010: Update Keybindings, Lang files, and BowHudOverlay integration**
   - Deliverables: Updated `BowHitboxHelperClient.java`, `BowHudOverlay.java`, lang JSONs.
   - Dependencies: TSK-007, TSK-008, TSK-009.
+
+- [x] **TSK-011: Implement 3D World Trajectory Arc & Landing Marker**
+  - Deliverables: `src/main/java/com/example/bowhitbox/TrajectoryRenderer.java`.
+  - Dependencies: TSK-003.
+
+- [x] **TSK-012: Implement Dynamic Crosshair Bow Charge Indicator**
+  - Deliverables: `src/main/java/com/example/bowhitbox/CrosshairIndicator.java`.
+  - Dependencies: TSK-003.
+
+- [x] **TSK-013: Upgrade BookmarkManager to 5 slots with cycling keybind**
+  - Deliverables: Updated `BookmarkManager.java`, `BowHitboxHelperClient.java`, `BowHudOverlay.java`.
+  - Dependencies: TSK-007.
+
+- [x] **TSK-014: Verification, Git commit, and Push to GitHub**
+  - Deliverables: Git commit and push to remote.
+  - Dependencies: TSK-011, TSK-012, TSK-013.
+
+
 
 

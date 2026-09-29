@@ -84,13 +84,24 @@ public final class BowHudOverlay {
         client.textRenderer.drawWithShadow(matrices, String.format("§fНатяжение: %s%.0f%% §7(V0=%.1f)", chargeColor, pull * 100.0f, speed), x, y, 0xFFFFFF);
         y += lineHeight;
 
-        // Active bookmark delta
-        if (BookmarkManager.hasBookmark()) {
+        // Multi-slot Bookmark display
+        int slotNum = BookmarkManager.getActiveSlotNumber();
+        if (BookmarkManager.hasActiveBookmark()) {
             float dYaw = BookmarkManager.getDeltaYaw(player.yaw);
             float dPitch = BookmarkManager.getDeltaPitch(player.pitch);
             String yawGuide = dYaw > 0 ? String.format("вправо +%.1f°", dYaw) : String.format("влево %.1f°", dYaw);
             String pitchGuide = dPitch < 0 ? String.format("подними +%.1f°", -dPitch) : String.format("опусти -%.1f°", dPitch);
-            client.textRenderer.drawWithShadow(matrices, String.format("§d[Метка] §7%s, %s", yawGuide, pitchGuide), x, y, 0xFFFFFF);
+            client.textRenderer.drawWithShadow(
+                matrices,
+                String.format("§d[Метка %d/5] §7%s, %s", slotNum, yawGuide, pitchGuide),
+                x, y, 0xFFFFFF
+            );
+        } else {
+            client.textRenderer.drawWithShadow(
+                matrices,
+                String.format("§8[Метка %d/5 пуста (K-запомнить, N-слот)]", slotNum),
+                x, y, 0xFFFFFF
+            );
         }
     }
 }

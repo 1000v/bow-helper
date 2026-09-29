@@ -28,16 +28,29 @@
 - **FR-6.2**: When looking at a target with a bow, the client SHALL calculate the recommended launch pitch angle to hit the target based on Minecraft arrow ballistics (velocity 3.0, drag 0.99, gravity 0.05).
 - **FR-6.3**: The HUD SHALL display the target distance, recommended elevation pitch, and guidance difference (e.g. `Подними прицел на +X.X°`).
 
-### FR-7: Armor & Held Item Durability HUD
-- **FR-7.1**: The client SHALL render durability indicators for all equipped armor pieces (Helmet, Chestplate, Leggings, Boots) and current held item.
-- **FR-7.2**: Durability SHALL display remaining uses and color-coded status (Green > 60%, Yellow 25-60%, Red < 25%).
+### FR-8: 3D World Arrow Trajectory Arc
+- **FR-8.1**: When the player holds a bow, the client SHALL render a 3D parabolic trajectory arc in the world from the player's eye/hand along the simulated arrow path.
+- **FR-8.2**: The trajectory SHALL raycast against world blocks (`world.raycast`) to detect the impact point and terminate the arc.
+- **FR-8.3**: A visual landing marker (box/cross) SHALL be rendered at the exact impact location.
+- **FR-8.4**: Trajectory rendering SHALL be toggleable via master HUD keybind `H`.
+
+### FR-9: Dynamic Crosshair Bow Charge Indicator
+- **FR-9.1**: When pulling a bow, the client SHALL display a dynamic visual indicator near the center crosshair reflecting pull progress (0% to 100%).
+- **FR-9.2**: When pull reaches 100% (ready for full critical velocity), the crosshair indicator SHALL highlight bright green with a ready symbol (`§a◎`).
+
+### FR-10: Multi-Slot Angle Bookmarks (5 Slots)
+- **FR-10.1**: The bookmark system SHALL support 5 distinct memory slots (1 through 5).
+- **FR-10.2**: The client SHALL provide a keybind (default: `N`) to cycle through bookmark slots.
+- **FR-10.3**: Keybind `K` SHALL save aim angles and position into the currently selected slot.
+- **FR-10.4**: Keybind `J` SHALL clear the currently selected slot.
+- **FR-10.5**: The HUD SHALL display the currently active slot number (e.g., `[Метка 2/5]`) and its alignment guidance.
 
 ---
 
 ## 2. Non-Functional Requirements (NFR)
 
 - **NFR-1 (Compatibility)**: Must build cleanly targeting Minecraft 1.16.5 with Fabric Loader and Yarn mappings.
-- **NFR-2 (Performance)**: HUD rendering must execute in O(1) time per frame without causing frame drops or garbage collection spikes.
+- **NFR-2 (Performance)**: HUD and 3D trajectory rendering must execute with minimal overhead (max 80 simulation steps per frame).
 - **NFR-3 (Clean Project Skeleton)**: Gradle configuration must be self-contained and reproducible.
 
 ---
@@ -51,4 +64,8 @@
 - **AC-5.1**: Given player presses `K`, then current aim is saved and alignment guidance appears on HUD.
 - **AC-6.1**: Given crosshair points at a distant target, then HUD shows exact distance and recommended pitch to hit.
 - **AC-7.1**: Given player equips armor or holds damaged tool, then remaining durability displays on HUD.
+- **AC-8.1**: Given player holds a bow, then a 3D curve with landing marker is drawn in the game world.
+- **AC-9.1**: Given player charges a bow, then a dynamic indicator around the crosshair turns green at 100% charge.
+- **AC-10.1**: Given player presses `N`, then active bookmark slot switches between 1 and 5.
+
 

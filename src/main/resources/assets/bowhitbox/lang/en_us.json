@@ -1,8 +1,9 @@
 {
   "category.bowhitbox.general": "Bow & Hitbox Helper",
-  "key.bowhitbox.toggle_hud": "Toggle Bow HUD",
+  "key.bowhitbox.toggle_hud": "Toggle Bow HUD & Trajectory",
   "key.bowhitbox.toggle_hitbox": "Toggle Hitboxes",
   "key.bowhitbox.save_bookmark": "Save Aim Bookmark",
-  "key.bowhitbox.clear_bookmark": "Clear Aim Bookmark",
+  "key.bowhitbox.cycle_bookmark": "Cycle Bookmark Slot (1-5)",
+  "key.bowhitbox.clear_bookmark": "Clear Current Bookmark",
   "key.bowhitbox.toggle_armor": "Toggle Armor HUD"
 }

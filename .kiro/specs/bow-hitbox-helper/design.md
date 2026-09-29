@@ -28,17 +28,21 @@ The mod is a client-only Fabric mod (`environment: "client"` in `fabric.mod.json
 5. **`TrajectoryMath` & `BallisticsSolver`**:
    - Discrete physics simulation matching MC 1.16.5 ($v_0 = 3.0$, drag $= 0.99$, gravity $= 0.05$).
    - Calculates recommended launch pitch to hit target at $(D, \Delta y)$.
-6. **`BookmarkManager`**: Stores active angle/position bookmark, computes $\Delta$Yaw and $\Delta$Pitch relative to current look vector.
+6. **`BookmarkManager`**: Stores up to 5 angle/position bookmarks with active slot switching, computing $\Delta$Yaw and $\Delta$Pitch relative to current look vector.
+7. **`TrajectoryRenderer`**: Subscribes to `WorldRenderEvents.AFTER_TRANSLUCENT`. Traces a 3D line in the world matching simulated arrow flight with block raycasting, and draws a landing marker box at the hit coordinates.
+8. **`CrosshairIndicator`**: Renders a dynamic charging indicator at screen center around the crosshair, turning bright green at 100% full pull.
 
 ---
 
 ## 2. Keybindings & Controls
 
-- **Master Toggle (`key.bowhitbox.toggle_hud`)**: Default `KEY_H`. Toggles HUD overlay visibility.
+- **Master Toggle (`key.bowhitbox.toggle_hud`)**: Default `KEY_H`. Toggles HUD overlay and 3D trajectory visibility.
 - **Hitbox Toggle (`key.bowhitbox.toggle_hitbox`)**: Default `KEY_B`. Directly toggles vanilla hitboxes.
-- **Save Bookmark (`key.bowhitbox.save_bookmark`)**: Default `KEY_K`. Saves current aim and player location.
-- **Clear Bookmark (`key.bowhitbox.clear_bookmark`)**: Default `KEY_J`. Clears saved bookmark.
+- **Save Bookmark (`key.bowhitbox.save_bookmark`)**: Default `KEY_K`. Saves current aim and location in active slot.
+- **Cycle Bookmark Slot (`key.bowhitbox.cycle_bookmark`)**: Default `KEY_N`. Cycles active slot (1..5).
+- **Clear Bookmark (`key.bowhitbox.clear_bookmark`)**: Default `KEY_J`. Clears active slot.
 - **Armor HUD Toggle (`key.bowhitbox.toggle_armor`)**: Default `KEY_U`. Toggles Armor HUD.
+
 
 Category in Controls menu: `category.bowhitbox.general`.
 

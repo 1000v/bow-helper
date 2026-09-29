@@ -4,6 +4,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.options.KeyBinding;
 import net.minecraft.client.util.InputUtil;
@@ -16,6 +17,7 @@ public class BowHitboxHelperClient implements ClientModInitializer {
     private static KeyBinding toggleHudKey;
     private static KeyBinding toggleHitboxKey;
     private static KeyBinding saveBookmarkKey;
+    private static KeyBinding cycleBookmarkKey;
     private static KeyBinding clearBookmarkKey;
     private static KeyBinding toggleArmorKey;
 
@@ -44,6 +46,13 @@ public class BowHitboxHelperClient implements ClientModInitializer {
             "category.bowhitbox.general"
         ));
 
+        cycleBookmarkKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+            "key.bowhitbox.cycle_bookmark",
+            InputUtil.Type.KEYSYM,
+            GLFW.GLFW_KEY_N,
+            "category.bowhitbox.general"
+        ));
+
         clearBookmarkKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
             "key.bowhitbox.clear_bookmark",
             InputUtil.Type.KEYSYM,
@@ -63,7 +72,7 @@ public class BowHitboxHelperClient implements ClientModInitializer {
                 hudEnabled = !hudEnabled;
                 if (client.player != null) {
                     client.player.sendMessage(
-                        new LiteralText("§e[Helper] §fHUD прицеливания: " + (hudEnabled ? "§aВКЛ" : "§cВЫКЛ")),
+                        new LiteralText("§e[Helper] §fHUD и траектория: " + (hudEnabled ? "§aВКЛ" : "§cВЫКЛ")),
                         true
                     );
                 }
@@ -84,25 +93,38 @@ public class BowHitboxHelperClient implements ClientModInitializer {
 
             while (saveBookmarkKey.wasPressed()) {
                 if (client.player != null) {
-                    BookmarkManager.saveBookmark(
+                    BookmarkManager.saveCurrentSlot(
                         client.player.yaw,
                         client.player.pitch,
                         client.player.getX(),
                         client.player.getY(),
                         client.player.getZ()
                     );
+                    int slot = BookmarkManager.getActiveSlotNumber();
                     client.player.sendMessage(
-                        new LiteralText(String.format("§d[Helper] §fМетка сохранена: Yaw: §e%.1f°§f, Pitch: §e%.1f°", client.player.yaw, client.player.pitch)),
+                        new LiteralText(String.format("§d[Helper] §fМетка [%d/5] сохранена: Yaw: §e%.1f°§f, Pitch: §e%.1f°", slot, client.player.yaw, client.player.pitch)),
+                        true
+                    );
+                }
+            }
+
+            while (cycleBookmarkKey.wasPressed()) {
+                int nextSlot = BookmarkManager.cycleSlot();
+                if (client.player != null) {
+                    String state = BookmarkManager.hasActiveBookmark() ? "§a(активна)" : "§7(пусто)";
+                    client.player.sendMessage(
+                        new LiteralText(String.format("§d[Helper] §fВыбран слот метки: §e[%d/5] %s", nextSlot, state)),
                         true
                     );
                 }
             }
 
             while (clearBookmarkKey.wasPressed()) {
-                BookmarkManager.clearBookmark();
+                int slot = BookmarkManager.getActiveSlotNumber();
+                BookmarkManager.clearCurrentSlot();
                 if (client.player != null) {
                     client.player.sendMessage(
-                        new LiteralText("§7[Helper] Метка сброшена"),
+                        new LiteralText(String.format("§7[Helper] Метка [%d/5] сброшена", slot)),
                         true
                     );
                 }
@@ -119,12 +141,17 @@ public class BowHitboxHelperClient implements ClientModInitializer {
             }
         });
 
+        // 2D HUD Rendering
         HudRenderCallback.EVENT.register((matrices, tickDelta) -> {
             if (hudEnabled) {
                 BowHudOverlay.render(matrices, tickDelta);
+                CrosshairIndicator.render(matrices, tickDelta);
             }
             ArmorHudOverlay.render(matrices, tickDelta);
         });
+
+        // 3D World Trajectory Rendering
+        WorldRenderEvents.AFTER_TRANSLUCENT.register(TrajectoryRenderer::render);
     }
 
     public static boolean isHudEnabled() {
