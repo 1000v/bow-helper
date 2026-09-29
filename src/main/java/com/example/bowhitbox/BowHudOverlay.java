@@ -55,7 +55,7 @@ public final class BowHudOverlay {
             double dx = hitPos.x - player.getX();
             double dz = hitPos.z - player.getZ();
             double horizDist = Math.sqrt(dx * dx + dz * dz);
-            double totalDist = player.getEyePos().distanceTo(hitPos);
+            double totalDist = player.getCameraPosVec(tickDelta).distanceTo(hitPos);
             double deltaY = hitPos.y - player.getEyeY();
 
             client.textRenderer.drawWithShadow(matrices, String.format("§fДистанция: §b%.1f бл.", totalDist), x, y, 0xFFFFFF);
